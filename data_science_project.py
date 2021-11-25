@@ -122,7 +122,6 @@ stocks_close_boeing = stocks_close_boeing.drop('Year', 1)
 ax1[0].plot(stocks_close_boeing)
 ax1[0].set_ylabel("Boeing (""BA"") annualized stock returns")
 ax1[0].set_title("Boeing (""BA"") Annualized Stock Returns, Mean and Standard Deviation by Year")
-plt.show()
 ax1[1].bar(ind,stocks_close_boeing_info["mean"], width, label = "Annualized Mean Return")
 ax1[1].bar(ind + width,stocks_close_boeing_info["std"], width, label = "Annualized Standard Deviation")
 #Set the xticks as a list to aid the labelling of the tick labels
@@ -166,16 +165,18 @@ stocks_by_sector_normalized_pct_change = stocks_by_sector_normalized_pct_change.
 stocks_by_sector_pct_change = stocks_by_sector_pct_change.dropna()
 correlations = stocks_by_sector_pct_change.corr()
 sns.heatmap(correlations, annot = True)
-plt.xticks(rotation=90)
+plt.xticks(rotation=45)
 plt.title('Return Correlations')
 plt.show()
 
 #Get summary statistics of the annualized returns of the selected portfolio & the benchmark
 print(stocks_by_sector_normalized_pct_change.describe())
-#Create boxplots of the sector-level annualized returns to visualize the...
+#Create boxplots of the sector-level annualized returns to visualize the distribution of returns for each sector
 fig3, ax3 = plt.subplots()
+ax3.set_title("Boxplot of normalized returns by Sector")
+ax3.set_ylabel("Normalized Returns")
 ax3.boxplot(stocks_by_sector_normalized_pct_change)
-ax3.set_xticklabels(columns_sel, rotation=90)
+ax3.set_xticklabels(columns_sel, rotation=45)
 
 #Defining a user-defined function to calculate the running return & multi-period return
 def multi_period_return(period_returns):
